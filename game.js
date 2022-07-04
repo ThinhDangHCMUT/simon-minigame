@@ -7,6 +7,7 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 var highScore = level;
+var mess;
 
 $("h1").click(function() {
   if (!started) {
@@ -37,11 +38,13 @@ function checkAnswer(currentLevel) {
       }
     } 
     else {
-      if(level > highScore) highScore = level -1;
+      if(level > highScore) highScore = level - 1;
+      if(highScore == 0) mess = "You are bad!";
+      if(highScore > 0 && highScore <= 5) mess = "You are Great!";
+      if(highScore >= 6) mess = "You are Terrible!";
       playSound("wrong");
       $("body").addClass("game-over");
-      $("#level-title").html("High Score, "+ highScore + "<br> <br/>Restart");
-
+      $("#level-title").html(mess + "<br> <br/>High Score " + highScore + "<br> <br/>Restart" );
       setTimeout(function () {
         $("body").removeClass("game-over");
       }, 200);
