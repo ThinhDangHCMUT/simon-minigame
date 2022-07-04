@@ -6,6 +6,7 @@ var userClickedPattern = [];
 
 var started = false;
 var level = 0;
+var highScore = level;
 
 $("h1").click(function() {
   if (!started) {
@@ -36,9 +37,10 @@ function checkAnswer(currentLevel) {
       }
     } 
     else {
+      if(level > highScore) highScore = level -1;
       playSound("wrong");
       $("body").addClass("game-over");
-      $("#level-title").html("Game Over, <br> <br/>Restart");
+      $("#level-title").html("High Score, "+ highScore + "<br> <br/>Restart");
 
       setTimeout(function () {
         $("body").removeClass("game-over");
